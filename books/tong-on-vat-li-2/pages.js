@@ -6,7 +6,15 @@ async function displayContent()
   const lessonName = urlParams.get('name');
   
   const response = await fetch(`data/dap-an/${lessonName}.json`);
+  if (!response.ok) {
+    console.log('out!');
+
+    // TODO: put a things on checklist https://www.checklist.design/website/404 here
+    document.body.innerHTML = "not found";
+    return
+  }
   const data = await response.json();
+  console.log(data);
 
   const questionList = document.getElementById('question-list');
 
@@ -18,8 +26,13 @@ async function displayContent()
     // Question's basic info
     const info = document.createElement('p');
     info.className = 'info';
-    info.innerHTML = `Câu ${question['order']}: [${question['questionId']}]`;
-    questionLi.appendChild(info);
+    if (question['bookId']) {
+      info.innerHTML = `Câu ${question['order']}: [${question['questionId']}]`;
+      questionLi.appendChild(info);
+    } else {
+      info.innerHTML = `Câu ${question['order']}:`;
+      questionLi.appendChild(info);
+    }
 
     // Question's content (includes the question text and choices)
     const content = document.createElement('div');
@@ -30,16 +43,18 @@ async function displayContent()
     questionContent.innerHTML = question['questionText'];
     content.appendChild(questionContent);
 
-    const choiceContent = document.createElement('div');
-    choiceContent.className = 'choice-content';
-    for (let i = 0; i < 4; i++) {
-      let choiceChar = ['A', 'B', 'C', 'D'];
-      let choice = document.createElement('p');
-      choice.className = 'choice';
-      choice.innerHTML = `${choiceChar[i]}. ${question[choiceChar[i].toLowerCase()]}`;
-      choiceContent.innerHTML += choice.outerHTML;
+    if (question['a']) {
+      const choiceContent = document.createElement('div');
+      choiceContent.className = 'choice-content';
+      for (let i = 0; i < 4; i++) {
+        let choiceChar = ['A', 'B', 'C', 'D'];
+        let choice = document.createElement('p');
+        choice.className = 'choice';
+        choice.innerHTML = `${choiceChar[i]}. ${question[choiceChar[i].toLowerCase()]}`;
+        choiceContent.innerHTML += choice.outerHTML;
+      }
+      content.appendChild(choiceContent);
     }
-    content.appendChild(choiceContent);
 
     questionLi.appendChild(content);
 
