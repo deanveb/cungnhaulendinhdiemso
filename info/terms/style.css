@@ -1,0 +1,45 @@
+body {
+  overflow-x: hidden;
+  height: 100vh;
+  background-color: lightblue;
+  background-image: url("../../background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+div>h1 {
+  font-size: 3rem;
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
+  width: fit-content;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 3px 10px 3px 16px;
+  margin-bottom: 0px;
+}
+
+div>ol>li>h2,
+div>ol>li::marker {
+  font-size: 2rem;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 0px;
+}
+
+div>ol>li>ul>li>p {
+  font-size: 1.8rem;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 0px;
+}
+
+div>ol>li>ul {
+  list-style-type: disc;
+}
+
+div>ol {
+  background-color: white;
+  /* FIXME: top right corner looks wrong on mobile */
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  margin-top: 0px;
+}
