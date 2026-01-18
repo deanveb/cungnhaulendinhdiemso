@@ -26,6 +26,9 @@ async function displayContent() {
     newLesson.id = lesson['name'];
     const link = document.createElement('a');
     link.href = `/${BASE}/books/Moon/subject/ly/tong-on-vat-li-2/pages/pages.html?name=${lesson['name']}`;
+    link.innerHTML = lesson['name'];
+    newLesson.appendChild(link);
+    list.appendChild(newLesson);
   });
 }
 
