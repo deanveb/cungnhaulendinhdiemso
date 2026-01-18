@@ -6,13 +6,12 @@ async function displayContent() {
   document.getElementById("main-title").innerHTML = lessonName;
   lessonName.replaceAll(" ", "\\ ");
 
-
   const url = window.location.href;
   // Go back once
-  const lastSlash = url.substring(0, url.lastIndexOf('/'));
-  const BASE = url.substring(0, lastSlash.lastIndexOf('/'));
+  const BASE = url.substring(0, url.lastIndexOf('/'));
+  const BASEP = url.substring(0, BASE.lastIndexOf('/'));
 
-  const response = await fetch(`${BASE}/data/dap-an/${lessonName}.json`);
+  const response = await fetch(`${BASEP}/data/dap-an/${lessonName}.json`);
   if (!response.ok) {
     // console.log('out!');
 
@@ -25,12 +24,19 @@ async function displayContent() {
 
   // Load the title
   document.title = lessonName;
-  // TODO: add content table
-
 
   const questionList = document.getElementById('question-list');
 
   data.forEach(question => {
+    // TODO: add content table
+    const headerLink = document.createElement('a');
+    headerLink.href = `${url}#${question['questionId']}`;
+    headerLink.className = 'header-link';
+    headerLink.id = `${question['questionId']}-link`;
+    headerLink.innerHTML = "1";
+
+    document.getElementById("content-table").append(headerLink);
+
     const questionLi = document.createElement('li');
     questionLi.className = 'question';
     questionLi.id = question['questionId'];
