@@ -58,7 +58,7 @@ body {
 }
 
 .link-container {
-  background-image: url('/border-image.png');
+  background-image: url('border-image.png');
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 10px;

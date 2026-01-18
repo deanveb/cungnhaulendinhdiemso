@@ -1,6 +1,6 @@
 async function displayContent() {
   const list = document.getElementById('lessons-list')
-  const response = await fetch("data/ds-bai-hoc/lessons.json");
+  const response = await fetch("./data/ds-bai-hoc/lessons.json");
   const data = await response.json();
   // TODO: improve the sorting algorithm to be sorted according to lessons order
   data.sort((a, b) => {
@@ -9,10 +9,10 @@ async function displayContent() {
     const nameB = b.name.toLowerCase();
 
     if (nameA < nameB) {
-        return -1; // nameA comes first
+      return -1; // nameA comes first
     }
     if (nameA > nameB) {
-        return 1; // nameB comes first
+      return 1; // nameB comes first
     }
     return 0; // names are equal
   });
