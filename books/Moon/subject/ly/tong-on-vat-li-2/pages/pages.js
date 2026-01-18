@@ -7,6 +7,7 @@ async function displayContent() {
   const url = window.location.href;
   const BASE = url.substring(0, url.lastIndexOf('/'));
 
+  console.log("${BASE}/data/dap-an/${lessonName}.json");
   const response = await fetch(`${BASE}/data/dap-an/${lessonName}.json`);
   if (!response.ok) {
     // console.log('out!');
